@@ -23,6 +23,8 @@ Syntax highlighted code block
 
 **Bold** and _Italic_ and `Code` text
 
+[mypage](https://github.com/behaeghe/DataProductWk3/master/README.html))
+
 [Link](url) and ![Image](src)
 ```
 
