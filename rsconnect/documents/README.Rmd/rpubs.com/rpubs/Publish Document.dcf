@@ -1,0 +1,8 @@
+name: Publish Document
+title:
+account: rpubs
+server: rpubs.com
+appId: https://api.rpubs.com/api/v1/document/290983/2ed67100b31c437a9648a23bf526cd66
+bundleId: https://api.rpubs.com/api/v1/document/290983/2ed67100b31c437a9648a23bf526cd66
+url: http://rpubs.com/behaeghe/290983
+when: 1499962338.94595

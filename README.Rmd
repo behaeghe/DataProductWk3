@@ -1,0 +1,53 @@
+---
+title: "Plotly and Geospatial Information"
+author: "JRB"
+date: "July 12, 2017"
+output: ioslides_presentation
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+#Setting up plotly
+Sys.setenv("plotly_username" = "jotti")
+Sys.setenv("plotly_api_key" = "pquD7lqcO2XRLMndYXHP")
+Sys.setenv('MAPBOX_TOKEN'='pk.eyJ1Ijoiam90dGkiLCJhIjoiY2o1MTFqN3ptMnBiODJ3bmtoYTlxdTd4biJ9.QMkYdUGAdgKzjBdvUickNw')
+#Some libaries we will need 
+library(jsonlite)
+library(plotly)
+```
+
+## Objective
+
+- This presentation will highlight the capabilty of plotly as an option for interactive visualization of  geospatial information.
+- We will represent the location and planned completion date of road work projects in the city of Boston.
+- The dataset was aquired from the "City of Boston" open data [platform](data.boston.gov)
+
+Data Source: https://data.cityofboston.gov/Permitting/Public-Works-Active-Work-Zones/4xn9-dedu
+
+## The Chart - as of July 13, 2017
+```{r mychart, echo=FALSE, message=FALSE, warning=FALSE}
+bosdata <- fromJSON("./data/bosdata.json")
+p <- bosdata %>% 
+     plot_mapbox( lat = ~lat, 
+                 lon= ~lon, 
+                 split= ~ProjectCategory, 
+                 size=2, 
+                 mode='scattermapbox',
+                 hovertext= ~EstimatedCompletionDate,
+                 hoverinfo= "text") %>%
+        layout(
+                plot_bgcolor = '000000', paper_bgcolor = 'FFFFFF',
+                mapbox = list(style = 'light',
+                              zoom = 11,
+                              center = list(lat = median(bosdata$lat,na.rm=TRUE),
+                                            lon = median(bosdata$lon,na.rm=TRUE))),
+                margin = list(l = 0, r = 0,
+                              b = 0, t = 0,
+                              pad = 0),
+                showlegend=TRUE)
+p
+
+```
+
+You can click on the legend dots to filter by type of roadwork, you can also zoom in and out of Boston. When you hover on the dots in the map, you will get the expected completion date of the work. Enjoy !
+
